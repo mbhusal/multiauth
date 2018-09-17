@@ -31,3 +31,5 @@ Route::group(['prefix'=>'admin'], function (){
     Route::GET('register', 'Admin\RegisterController@showRegistrationForm')->name('admin.register');
     Route::POST('register','Admin\RegisterController@registeradmin')->name('admin.as.register');
 });
+
+Route::get('verify/{email}/{verifyToken}','Auth\RegisterController@EmailSent')->name('emailsent');

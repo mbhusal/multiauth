@@ -52,22 +52,22 @@ class RegisterController extends Controller
 
 
 //register admin
-     public function registeradmin(AdminRequest $request)
-     {
+    public function registeradmin(AdminRequest $request)
+    {
         $admin = new Admin();
 
-        $admin->name= $request->name;
-        $admin->email= $request->email;
-        $admin->password= bcrypt($request->password);
+        $admin->name = $request->name;
+        $admin->email = $request->email;
+        $admin->password = bcrypt($request->password);
 
         $admin->save();
 
 
-         $this->guard()->login($admin);
+        $this->guard()->login($admin);
 
-         return $this->registered($request, $admin)
-             ?: redirect($this->redirectPath());
-     }
+        return $this->registered($request, $admin)
+            ?: redirect($this->redirectPath());
+    }
 
 
     public function redirectPath()
