@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Admin;
 use App\Http\Requests\AdminRequest;
-use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -43,37 +43,7 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
-
-
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
-    }
-
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
-    }
+//admin registration form
 
     public function showRegistrationForm()
     {
@@ -81,21 +51,32 @@ class RegisterController extends Controller
     }
 
 
-    public function registeradmin(AdminRequest $request)
+//register admin
+     public function registeradmin(AdminRequest $request)
+     {
+        $admin = new Admin();
+
+        $admin->name= $request->name;
+        $admin->email= $request->email;
+        $admin->password= bcrypt($request->password);
+
+        $admin->save();
+
+
+         $this->guard()->login($admin);
+
+         return $this->registered($request, $admin)
+             ?: redirect($this->redirectPath());
+     }
+
+
+    public function redirectPath()
     {
-       $admin = new Admin();
+        if (method_exists($this, 'redirectTo')) {
+            return $this->redirectTo();
+        }
 
-       $admin->name= $request->name;
-       $admin->email= $request->email;
-       $admin->password= bcrypt($request->password);
-
-       $admin->save();
-
-
-        $this->guard()->login($admin);
-
-        return $this->registered($request, $admin)
-            ?: redirect($this->redirectPath());
+        return property_exists($this, 'redirectTo') ? $this->redirectTo : 'admin/home';
     }
 
 

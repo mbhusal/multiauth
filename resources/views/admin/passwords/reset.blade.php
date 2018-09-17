@@ -8,7 +8,7 @@
                 <div class="panel-heading">Admin Reset Password</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('admin.password.request') }}">
+                    <form class="form-horizontal" method="POST" action="{{ route('admin.passwords.request') }}">
                         {{ csrf_field() }}
 
                         <input type="hidden" name="token" value="{{ $token }}">
