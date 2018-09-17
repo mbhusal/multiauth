@@ -73,6 +73,8 @@
                     @else
                         <a href="{{ route('login') }}">Login</a>
                         <a href="{{ route('register') }}">Register</a>
+                        <a href="{{ route('admin.login') }}">LoginAdmin</a>
+                        <a href="{{ route('admin.register') }}">RegisterAdmin</a>
                     @endauth
                 </div>
             @endif

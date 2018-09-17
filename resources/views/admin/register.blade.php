@@ -8,7 +8,7 @@
                 <div class="panel-heading">Admin Register</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('register_as_admin') }}">
+                    <form class="form-horizontal" method="POST" action="{{ route('admin.as.register') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
