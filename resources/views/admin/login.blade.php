@@ -6,6 +6,11 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Admin Login</div>
+                @if(session()->has('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endif
 
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('admin.login') }}">

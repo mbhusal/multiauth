@@ -93,7 +93,7 @@ class RegisterController extends Controller
     }
 
     //email sent, check mail
-    public function EmailSent($email,$verifytoken)
+    public function emailSent($email,$verifytoken)
     {
         $user = User::where(['email'=> $email, 'verifytoken'=> $verifytoken])->first();
         if($user){

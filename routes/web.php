@@ -21,7 +21,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix'=>'admin'], function (){
-    Route::GET('home', 'AdminController@index');
+    Route::GET('home', 'AdminController@index')->name('admin.home');
     Route::GET('login', 'Admin\LoginController@showLoginForm')->name('admin.login');
     Route::POST('login', 'Admin\LoginController@login');
     Route::POST('password/email','Admin\ForgotPasswordController@sendResetLinkEmail')->name('admin.passwords.email');
@@ -32,4 +32,5 @@ Route::group(['prefix'=>'admin'], function (){
     Route::POST('register','Admin\RegisterController@registeradmin')->name('admin.as.register');
 });
 
-Route::get('verify/{email}/{verifyToken}','Auth\RegisterController@EmailSent')->name('emailsent');
+Route::get('verify/{email}/{verifyToken}','Auth\RegisterController@emailSent')->name('emailsent');
+Route::get('verifyadmin/{email}/{verifyToken}','Admin\RegisterController@emailSent')->name('emailsentadmin');
