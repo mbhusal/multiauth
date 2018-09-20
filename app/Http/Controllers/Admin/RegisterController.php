@@ -63,6 +63,7 @@ class RegisterController extends Controller
 
         $admin->name = $request->name;
         $admin->email = $request->email;
+        $admin->store_name = $request->store_name;
         $admin->password = bcrypt($request->password);
         $admin->verifytoken = str::random(40);
         $admin->save();

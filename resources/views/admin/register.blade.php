@@ -39,6 +39,24 @@
                             </div>
                         </div>
 
+
+
+                        <div class="form-group{{ $errors->has('store_name') ? ' has-error' : '' }}">
+                            <label for="store_name" class="col-md-4 control-label">Store Name</label>
+
+                            <div class="col-md-6">
+                                <input id="store_name" type="text" class="form-control" name="store_name" value="{{ old('store_name') }}" required autofocus>
+
+                                @if ($errors->has('store_name'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('store_name') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+
+
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Password</label>
 
